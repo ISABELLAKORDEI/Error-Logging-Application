@@ -37,3 +37,283 @@ body {
 a {
   text-decoration: none;
 }
+
+// ***************************** auth form styles **************
+
+.auth-page-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(233, 241, 245, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+  z-index: 1;
+}
+
+.form-grid-card {
+  width: 70%;
+  height: 90%;
+  display: grid !important;
+  grid-template-columns: 50% 50%;
+  grid-auto-flow: row;
+  padding: 0px !important;
+  border-radius: 7px !important;
+}
+
+.form-left {
+  padding: 40px;
+  background-color: rgba(200, 220, 231, 0.4);
+  // background-image: url("./assets/images/auth_form_bg.svg");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+  .app-desc {
+    img {
+      width: 150px;
+    }
+
+    p {
+      font-size: 14px;
+      color: black;
+    }
+  }
+}
+
+.form-right {
+  padding: 40px;
+}
+
+.form-desc {
+  margin-top: 45px;
+  margin-bottom: 25px;
+
+  p {
+    color: gray;
+    font-weight: 200;
+    font-size: 14px;
+    margin-block: 0px;
+  }
+
+  h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-block: 0px;
+    margin: 6px 0px;
+  }
+
+  a {
+    color: $primary;
+    font-weight: 500;
+  }
+}
+
+.flex {
+  display: flex !important;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.forgot {
+  color: $primary;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 20px;
+  margin-right: 23px;
+  margin-bottom: -20px;
+}
+
+.form-field {
+  width: 95%;
+  height: 70px;
+  margin-top: 10px;
+  margin-right: 20px;
+
+  input {
+    font-size: 14px;
+    padding: 15px 10px;
+    border: 1px solid $grey;
+    border-radius: 10px;
+    background-color: transparent;
+  }
+
+  .mat-form-field-underline {
+    display: none;
+  }
+}
+
+.mat-form-field-prefix .mat-icon, .mat-form-field-suffix .mat-icon {
+  font-size: 100%;
+  line-height: 1.125;
+  color: $primary;
+}
+
+.form-pri-btn {
+  width: 95%;
+  font-weight: 500;
+  margin-top: 15px;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+
+  mat-spinner {
+    stroke: $primary;
+  }
+}
+
+.form-footer {
+  text-align: center;
+  font-size: 12px;
+  margin-block: 0px;
+  margin-top: 20%;
+
+  span {
+    color: $primary;
+  }
+}
+
+.mat-form-field-label{
+  padding-top: 10px;
+  padding-left: 5px;
+  font-size: 12px !important;
+}
+ 
+.form-btn:hover {
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+
+.bottom-sec{
+  form {
+      padding-left: 16px;
+  }
+  
+  .form-btn {
+      margin-top: 15px;
+  }
+}
+
+.icon-bg{
+  background-color: $primary;
+  padding: 5px 5px 0px 5px;
+  border-radius: 50%;
+
+  mat-icon{
+      color: white;
+  }
+}
+
+.form-btns{
+  display: flex !important;
+  justify-content: flex-end;
+  margin-top: 15px;
+  margin-right: 3%;
+
+  .pri-btn{
+    margin-right: 10px;
+  }
+}
+
+.form-error{
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.page-error {
+  margin: auto;
+  color: lightslategray;
+  text-align: center;
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+  }
+
+  mat-error {
+    margin-top: 15px;
+    font-size: 14px;
+    color: lightslategray !important;
+  }
+}
+
+// *************************************
+
+.page{
+  margin: 30px 35px;
+}
+
+.page-title{
+  margin-block: 0px;
+}
+
+.pri-btn {
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 10px 15px;
+  border: none;
+  margin-right: 10px;
+  font-weight: 600;
+
+  mat-icon {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: -12px;
+  }
+}
+
+.pri-btn:hover {
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+.primary-color{
+  background-color: $primary;
+  color: white;
+  font-weight: 500;
+}
+
+.delete-color{
+  background-color: $delete;
+  color: white;
+  font-weight: 500;
+}
+
+.new-color{
+  background-color: $new;
+  color: white;
+  font-weight: 500;
+}
+
+// ********** page card section styles **********
+.page-sec{
+  width: 80%;
+  padding: 0px !important;
+}
+
+.top-sec{
+  padding: 10px;
+  background-color:  rgba(233, 241, 245);
+}
+
+.bottom-sec{
+  padding-bottom: 15px;
+
+  p{
+      margin-block: 0px;
+      font-weight: 600;
+      margin: 40px 15px 0px 15px;
+      font-size: 14px;
+  }
+}
+
+.block{
+  display: block !important;
+}
