@@ -1,0 +1,158 @@
+@import '../theme/variables.scss';
+
+mat-sidenav-container {
+  height: 90% !important;
+}
+
+mat-toolbar {
+  height: 60px !important;
+  color: white;
+  background-color: rgb(28, 150, 232);
+  padding: 0px 65px 0px 40px;
+  justify-content: space-between;
+}
+
+.toolbar-left {
+  display: flex;
+}
+
+.vertical-divider {
+  width: 2px !important;
+  height: 20px;
+  border-right-width: 2px;
+  background-color: white;
+  opacity: 80%;
+  margin: 15px;
+}
+
+.hidden {
+  display: none;
+}
+
+.logo {
+  display: flex;
+}
+
+.brand {
+  font-size: 16px;
+  margin-block: 0px;
+  height: 20px;
+}
+
+.username {
+  @extend .brand;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.tagline {
+  font-size: 12px;
+  margin-block: 0px;
+}
+
+.profile {
+  display: flex;
+
+  mat-icon {
+    font-size: 25px;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+}
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 240px;
+  font-size: 12px !important;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+mat-sidenav {
+  padding-left: 21px;
+}
+
+mat-divider {
+  width: 85% !important;
+  margin-bottom: 10px;
+}
+
+a {
+  font-size: 12px !important;
+  border-radius: 10px;
+  width: 85% !important;
+  height: 38px !important;
+  margin: 10px 0px;
+}
+
+mat-list-item {
+  margin: 0px 15px;
+  border-radius: 15px;
+}
+
+.nav-icon {
+  font-size: 16px;
+  margin-top: 8px;
+  margin-right: 5px;
+}
+
+.active-menu {
+  background-color: $primary !important;
+  color: white;
+  font-weight: 500;
+}
+
+p {
+  margin-top: 30px;
+}
+
+.bottom-nav {
+  text-align: center;
+  font-size: 10px;
+  margin-top: 70%;
+  margin-right: 30px;
+  font-weight: 500;
+
+  img{
+    width: 40px;
+  }
+
+  p {
+    margin-block: 0;
+    font-weight: 500;
+  }
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  a{
+    mat-icon{
+      margin-left: 10px;
+    }
+  }
+}
+
+.tooltip .tooltiptext {
+  font-size: 12px;
+  visibility: hidden;
+  background-color: darkgray;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 1000;
+  width: 90px;
+  top: 70%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
