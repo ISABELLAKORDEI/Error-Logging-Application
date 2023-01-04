@@ -126,18 +126,17 @@ a {
   font-weight: 500;
   margin-top: 20px;
   margin-right: 23px;
-  margin-bottom: -20px;
 }
 
 .form-field {
   width: 95%;
-  height: 70px;
+  height: 90px;
   margin-top: 10px;
   margin-right: 20px;
 
   input {
-    font-size: 14px;
-    padding: 15px 10px;
+    font-size: 12px;
+    padding: 10px;
     border: 1px solid $grey;
     border-radius: 10px;
     background-color: transparent;
