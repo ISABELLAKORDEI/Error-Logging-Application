@@ -1,1 +1,62 @@
-<p>login works!</p>
+<main class="auth-page-bg">
+    <mat-card class="form-grid-card">
+        <div class="form-left">
+            <div class="app-desc">
+                <img src="../../../assets/images/twittnow_logo.png" alt="">
+                <p>Enabling you to extend powerful ServiceNow features to your customers on Twitter.</p>
+            </div>
+        </div>
+        <div class="form-right">
+
+            <div class="form-desc">
+                <p>WELCOME BACK</p>
+                <h3>Sign in to your TwittNow Account</h3>
+                <p>New member? <a routerLink="/register">Sign Up</a></p>
+            </div>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+                <div class="flex">
+                    <mat-form-field class="form-field">
+                        <input matInput placeholder="Email Addess" formControlName="username" required>
+                        <mat-icon matSuffix>alternate_email</mat-icon>
+                        <mat-error *ngIf="loginForm.controls['username'].hasError('required')">
+                            Your email address name is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="loginForm.controls['username'].hasError('pattern')">
+                            Please enter a valid email address
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div #forgot (click)="gotoForgot()" class="flex justify-between">
+                    <div></div>
+                    <a routerLink="/forgot_password" class="forgot">Forgot Password?</a>
+                </div>
+
+                <div class="flex">
+                    <mat-form-field class="form-field">
+                        <input matInput type="password" placeholder="Password" [type]="hide ? 'password' : 'text'"
+                            formControlName="password" required>
+                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
+                        </mat-icon>
+                        <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+                            Your password is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <button *ngIf="!isLoading" mat-raised-button class="form-btn" style="margin-top: 15px;" color="primary" type="submit"
+                    [disabled]="loginForm.invalid">Log In</button>
+                    <div *ngIf="isLoading" class="spinner">
+                        <mat-spinner strokeWidth="3" diameter="40" ></mat-spinner>
+                    </div>
+                <mat-error class="form-error" *ngIf="isLoginError">{{errorMessage}}</mat-error>
+
+                <div class="form-footer">
+                    <p><span>Terms</span> and <span>Conditions</span> apply.</p>
+                </div>
+            </form>
+        </div>
+    </mat-card>
+
+</main>
