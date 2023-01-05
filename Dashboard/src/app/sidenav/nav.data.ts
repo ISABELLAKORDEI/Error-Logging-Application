@@ -12,6 +12,10 @@ export const navbarData: INavbarData[] = [
         label: 'Errors',
         items: [
             {
+                routeLink:'errors/all',
+                label: 'ALL'
+            },
+            {
                 routeLink:'errors/info',
                 label: 'INFO'
             },

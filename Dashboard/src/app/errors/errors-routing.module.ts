@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ErrorsComponent } from './errors.component';
 
 const routes: Routes = [
-  {path: 'info',
+  {path: 'all',
   component: ErrorsComponent 
 },
 ];
