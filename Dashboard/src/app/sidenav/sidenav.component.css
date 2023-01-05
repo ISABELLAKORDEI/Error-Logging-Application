@@ -107,6 +107,10 @@
         color: #000;
     }
 
+.active-sublevel {
+        color: #f3f3f3 !important;
+}
+
 .menu-collapse-icon{
     font-size: 25px;
     width: 2rem;
@@ -144,6 +148,6 @@
     }
 
 .sublevel-nav-link:hover {
-    color: #f3f3f3;
+    color: #fff;
     }
-    
+      

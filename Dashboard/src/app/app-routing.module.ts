@@ -8,7 +8,10 @@ import { SettingsComponent } from './settings/settings.component';
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent },
-  {path: 'errors', component: ErrorsComponent },
+  { 
+    path: 'errors', 
+    loadChildren: () => import('./errors/errors.module').then(m => m.ErrorsModule)
+  },
   {path: 'recents', component: RecentsComponent },
   {path: 'settings', component: SettingsComponent }
 ];
