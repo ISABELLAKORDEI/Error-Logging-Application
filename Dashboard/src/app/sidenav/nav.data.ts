@@ -1,6 +1,4 @@
-import { INavbarData } from "./helper";
-
-export const navbarData: INavbarData[] = [
+export const navbarData = [
     {
         routeLink: 'dashboard',
         icon: 'fal fa-home',
@@ -10,28 +8,6 @@ export const navbarData: INavbarData[] = [
         routeLink: 'errors',
         icon: 'fal fa-exclamation-triangle',
         label: 'Errors',
-        items: [
-            {
-                routeLink:'errors/all',
-                label: 'ALL'
-            },
-            {
-                routeLink:'errors/info',
-                label: 'INFO'
-            },
-            {
-                routeLink:'errors/debug',
-                label: 'DEBUG'
-            },
-            {
-                routeLink:'errors/error',
-                label: 'ERROR'
-            },
-            {
-                routeLink:'errors/fatal',
-                label: 'FATAL'
-            }
-        ]
     },
     {
         routeLink: 'recents',
