@@ -25,6 +25,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -53,6 +55,8 @@ import { AuthService } from './auth/auth.service';
     MatProgressSpinnerModule,
     MatDividerModule,
     MatListModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [
     AuthService,
