@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ErrorsComponent } from './errors/errors.component';
-import { RecentsComponent } from './recents/recents.component';
-import { SettingsComponent } from './settings/settings.component';
+import { DashboardComponent } from './core/dashboard/dashboard.component';
+import { ErrorsComponent } from './core/errors/errors.component';
+import { RecentsComponent } from './core/recents/recents.component';
+import { SettingsComponent } from './core/settings/settings.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},

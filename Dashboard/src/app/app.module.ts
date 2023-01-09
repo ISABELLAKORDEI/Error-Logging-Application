@@ -14,12 +14,12 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 
 import { AppComponent } from './app.component';
-import { BodyComponent } from './body/body.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ErrorsComponent } from './errors/errors.component';
-import { RecentsComponent } from './recents/recents.component';
-import { SettingsComponent } from './settings/settings.component';
+import { BodyComponent } from './layout/body/body.component';
+import { SidenavComponent } from './layout/sidenav/sidenav.component';
+import { DashboardComponent } from './core/dashboard/dashboard.component';
+import { ErrorsComponent } from './core/errors/errors.component';
+import { RecentsComponent } from './core/recents/recents.component';
+import { SettingsComponent } from './core/settings/settings.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
