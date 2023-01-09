@@ -10,6 +10,8 @@ import { ErrorsComponent } from './errors/errors.component';
 import { RecentsComponent } from './recents/recents.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 
 @NgModule({
@@ -21,6 +23,8 @@ import { AppRoutingModule } from './app-routing.module';
     ErrorsComponent,
     RecentsComponent,
     SettingsComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
