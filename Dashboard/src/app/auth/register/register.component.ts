@@ -42,7 +42,6 @@ export class RegisterComponent implements OnInit {
         }, 2000);
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error);
         if (error.status == 0) {
           this.errorMessage = 'Registration Failed! Please check your internet connection or try again later';
         } else {

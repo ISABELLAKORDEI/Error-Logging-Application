@@ -22,9 +22,7 @@ export class LoginComponent implements OnInit {
   
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   onSubmit() {
     this.isLoading = true;
@@ -32,7 +30,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.getRawValue()).subscribe({
         next: (response) => {
             this.isLoading = false;
-            this.router.navigateByUrl('/home');
+            this.router.navigateByUrl('/dashboard');
         },
       error: (error: HttpErrorResponse) => {
         if(error.status == 0){
@@ -44,9 +42,5 @@ export class LoginComponent implements OnInit {
         this.isLoginError = true;
         throw error;
       }});
-  }
-
-  gotoForgot(){
-    this.router.navigateByUrl('/forgot_password');
   }
 }
