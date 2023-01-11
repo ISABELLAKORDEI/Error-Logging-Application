@@ -1,37 +1,27 @@
 <main class="auth-page-bg">
     <mat-card class="form-grid-card">
         <div class="form-left">
-            <div class="app-desc">
-                <img src="" alt="">
-                <p>Error Logging Application.</p>
-            </div>
-        </div>
-        <div class="form-right">
-
             <div class="form-desc">
                 <p>WELCOME BACK</p>
                 <h3>Sign in to your Account</h3>
                 <p>New member? <a routerLink="/register">Sign Up</a></p>
             </div>
+        </div>
 
+        <div class="form-right">
+            <h3>Login</h3>
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-                <div class="flex">
-                    <mat-form-field class="form-field">
-                        <input matInput placeholder="Email Addess" formControlName="username" required>
-                        <mat-icon matSuffix>alternate_email</mat-icon>
-                        <mat-error *ngIf="loginForm.controls['username'].hasError('required')">
-                            Your email address name is <strong>required</strong>
-                        </mat-error>
-                        <mat-error *ngIf="loginForm.controls['username'].hasError('pattern')">
-                            Please enter a valid email address
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div #forgot (click)="gotoForgot()" class="flex justify-between">
-                    <div></div>
-                    <a routerLink="/forgot_password" class="forgot">Forgot Password?</a>
-                </div>
+                <mat-form-field class="form-field">
+                    <input matInput placeholder="Email Addess" formControlName="username" required>
+                    <mat-icon matSuffix>alternate_email</mat-icon>
+                    <mat-error *ngIf="loginForm.controls['username'].hasError('required')">
+                        Your email address name is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="loginForm.controls['username'].hasError('pattern')">
+                        Please enter a valid email address
+                    </mat-error>
+                </mat-form-field>
 
                 <div class="flex">
                     <mat-form-field class="form-field">
@@ -45,11 +35,11 @@
                     </mat-form-field>
                 </div>
 
-                <button *ngIf="!isLoading" mat-raised-button class="form-btn" style="margin-top: 15px;" color="primary" type="submit"
-                    [disabled]="loginForm.invalid">Log In</button>
-                    <div *ngIf="isLoading" class="spinner">
-                        <mat-spinner strokeWidth="3" diameter="40" ></mat-spinner>
-                    </div>
+                <button *ngIf="!isLoading" mat-raised-button class="form-btn" style="margin-top: 15px;" color="primary"
+                    type="submit" [disabled]="loginForm.invalid">Log In</button>
+                <div *ngIf="isLoading" class="spinner">
+                    <mat-spinner strokeWidth="3" diameter="40"></mat-spinner>
+                </div>
                 <mat-error class="form-error" *ngIf="isLoginError">{{errorMessage}}</mat-error>
 
                 <div class="form-footer">

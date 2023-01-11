@@ -31,11 +31,12 @@ export class AuthService {
 
   get isLoggedIn() {
     var token = this.getLocalToken();
-    if (token == undefined) {
+    if (token == undefined || {}) {
       this.loggedIn.next(false);
     } else {
       this.loggedIn.next(true);
     }
+    console.log(this.loggedIn);
     return this.loggedIn.asObservable();
   }
 
@@ -96,7 +97,7 @@ export class AuthService {
   }
 
   localSaveUser(profile: any) {
-    localStorage.setItem('userId', JSON.stringify(profile['user']['id']));
+    localStorage.setItem('userId', JSON.stringify(profile['email']));
     localStorage.setItem('userToken', JSON.stringify(profile['token']));
   }
 

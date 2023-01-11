@@ -5,22 +5,21 @@ $Dashboard-primary: mat.define-palette(mat.$blue-palette);
 $Dashboard-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
 $Dashboard-warn: mat.define-palette(mat.$red-palette);
-$Dashboard-theme: mat.define-light-theme((
-  color: (
-    primary: $Dashboard-primary,
-    accent: $Dashboard-accent,
-    warn: $Dashboard-warn,
-  )
-));
+$Dashboard-theme: mat.define-light-theme((color: (primary: $Dashboard-primary,
+                accent: $Dashboard-accent,
+                warn: $Dashboard-warn,
+            )));
 @include mat.all-component-themes($Dashboard-theme);
 
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import './variables.scss';
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: $font-reg !important;
 }
 
 body {
@@ -28,7 +27,7 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-.card{
+.card {
     display: flex;
     flex-direction: column;
     border: .5em;
@@ -42,8 +41,237 @@ body {
     border-bottom: 1px solid #edf1f7;
     font-size: 1rem;
     font-weight: 600;
-    }
+}
 
 .card-body {
-    padding: 1rem 1.5rem; 
+    padding: 1rem 1.5rem;
+}
+
+// ---------- auth page styles ---------------
+
+.auth-page-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(0, 33, 64, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+    z-index: 1;
+}
+
+.form-grid-card {
+    width: 70%;
+    height: 90%;
+    display: grid !important;
+    grid-template-columns: 50% 50%;
+    grid-auto-flow: row;
+    padding: 0px !important;
+    border-radius: 10px !important;
+    box-shadow: 2px 2px 2px rgba(255, 255, 255, 0.5);
+}
+
+.form-left {
+    padding: 40px ;
+    background-color: $primary;
+    background-image: url("../assets/images/troubleshooting.svg");
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    color: white;
+
+    .form-desc {
+        margin-bottom: 25px;
+    
+        p {
+            color: whitesmoke;
+            font-weight: 200;
+            font-size: 14px;
+            margin-block: 0px;
+        }
+    
+        h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-block: 0px;
+            margin: 6px 0px;
+        }
+    
+        a {
+            color: $update;
+            font-weight: 500;
+        }
+    }
+}
+
+.form-right {
+    padding: 40px;
+
+    h3{
+        color: $primary;
+        font-size: 22px;
+        margin: 20px 0px;
+    }
+}
+
+.flex {
+    display: flex !important;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.form-field {
+    width: 95%;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.mat-form-field-prefix .mat-icon,
+.mat-form-field-suffix .mat-icon {
+    font-size: 32px;
+    line-height: 1.125;
+    color: $primary;
+}
+
+.form-btn {
+    width: 95%;
+    font-weight: 500;
+    margin-top: 15px;
+}
+
+.spinner {
+    display: flex;
+    justify-content: center;
+
+    mat-spinner {
+        stroke: $primary;
+    }
+}
+
+.form-footer {
+    text-align: center;
+    font-size: 12px;
+    margin-block: 0px;
+    margin-top: 20%;
+
+    span {
+        color: $primary;
+    }
+}
+
+.mat-form-field-label {
+    padding-top: 10px;
+    padding-left: 5px;
+    font-size: 12px !important;
+}
+
+.form-btn:hover {
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+
+.bottom-sec {
+    form {
+        padding-left: 16px;
+    }
+
+    .form-btn {
+        margin-top: 15px;
+    }
+}
+
+.icon-bg {
+    background-color: $primary;
+    padding: 5px 5px 0px 5px;
+    border-radius: 50%;
+
+    mat-icon {
+        color: white;
+    }
+}
+
+.form-btns {
+    display: flex !important;
+    justify-content: flex-end;
+    margin-top: 15px;
+    margin-right: 3%;
+
+    .pri-btn {
+        margin-right: 10px;
+    }
+}
+
+.form-error {
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.page-error {
+    margin: auto;
+    color: lightslategray;
+    text-align: center;
+
+    mat-icon {
+        font-size: 48px;
+        width: 48px;
+        height: 48px;
+    }
+
+    mat-error {
+        margin-top: 15px;
+        font-size: 14px;
+        color: lightslategray !important;
+    }
+}
+
+// *************************************
+
+.page {
+    margin: 30px 35px;
+}
+
+.page-title {
+    margin-block: 0px;
+}
+
+.pri-btn {
+    font-size: 14px;
+    border-radius: 5px;
+    padding: 10px 15px;
+    border: none;
+    margin-right: 10px;
+    font-weight: 600;
+
+    mat-icon {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: -12px;
+    }
+}
+
+.pri-btn:hover {
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+.primary-color {
+    background-color: $primary;
+    color: white;
+    font-weight: 500;
+}
+
+.delete-color {
+    background-color: $delete;
+    color: white;
+    font-weight: 500;
+}
+
+.new-color {
+    background-color: $new;
+    color: white;
+    font-weight: 500;
 }

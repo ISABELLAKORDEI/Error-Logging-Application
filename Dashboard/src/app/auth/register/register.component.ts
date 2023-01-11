@@ -12,16 +12,13 @@ import { AuthService } from '../auth.service';
 })
 export class RegisterComponent implements OnInit {
   hide = true;
-  phonePattern = "^0((7|1)(?:(?:[0-9][0-9])|(?:0[0-8])|(4[0-1]))[0-9]{6})$";
   isRegError: boolean = false;
   isLoading: boolean = false
   errorMessage: any;
 
   regForm = this.fb.group({
-    first_name: [null, Validators.required],
-    last_name: [null, Validators.required],
-    company_name: [null, Validators.required],
-    username: [null, Validators.compose([Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")])],
+    username: [null, Validators.required],
+    email: [null, Validators.required],
     password: [null, Validators.compose([Validators.required, Validators.minLength(6)])],
   });
 
