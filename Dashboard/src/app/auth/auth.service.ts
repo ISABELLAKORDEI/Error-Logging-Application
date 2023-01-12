@@ -8,7 +8,7 @@ import { createUserUrl, loginUserUrl } from 'src/utils/urls';
   providedIn: 'root'
 })
 export class AuthService {
-  private loggedIn = new BehaviorSubject<boolean>(false);
+  private loggedIn = false;
 
   auth_headers = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  get getUserHeaders(){
+  get getUserHeaders() {
     var token = this.getLocalToken();
     return new HttpHeaders({
       'Content-Type': 'application/json',
@@ -32,16 +32,16 @@ export class AuthService {
   get isLoggedIn() {
     var token = this.getLocalToken();
     if (token == undefined || {}) {
-      this.loggedIn.next(false);
+      this.loggedIn = false;
     } else {
-      this.loggedIn.next(true);
+      this.loggedIn = true;
     }
-    return this.loggedIn.asObservable();
+    return this.loggedIn;
   }
 
   register(formValues: any): Observable<any> {
     return this.http.post(createUserUrl, formValues, {
-      headers: this.auth_headers, observe: 'response'
+      headers: {}, observe: 'response'
     })
       .pipe(map(response => {
         return response;
@@ -49,7 +49,7 @@ export class AuthService {
   }
 
   updateUser(formValues: any): Observable<any> {
-    var userId = this.getLocalId();
+    var userId = 1;
     return this.http.patch(createUserUrl + userId + '/', formValues,
       { headers: this.getUserHeaders, observe: 'response' })
       .pipe(map(response => {
@@ -59,15 +59,14 @@ export class AuthService {
 
   login(formValues: any): Observable<any> {
     return this.http.post<any>(loginUserUrl, formValues, {
-      headers: this.headers,
-      observe: 'response',
-      withCredentials: true
+      headers: {},
+      observe: 'response'
     }).pipe(map(response => {
       if (response.status == 200) {
-        this.localSaveUser(response.body);
-        this.loggedIn.next(true);
+        this.localSaveUser(response.body['data'].token);
+        this.loggedIn = true;
       } else {
-        this.loggedIn.next(false);
+        this.loggedIn = false;
       }
       return response;
     }));
@@ -87,7 +86,7 @@ export class AuthService {
   //   }));
   // }
 
-  getUser(){
+  getUser() {
     return {
       'first_name': 'Admin',
       'last_name': 'One',
@@ -96,12 +95,7 @@ export class AuthService {
   }
 
   localSaveUser(profile: any) {
-    localStorage.setItem('userId', JSON.stringify(profile['email']));
-    localStorage.setItem('userToken', JSON.stringify(profile['token']));
-  }
-
-  getLocalId(): any {
-    return JSON.parse(localStorage.getItem('userId') || "{}")
+    localStorage.setItem('userToken', JSON.stringify(profile));
   }
 
   getLocalToken(): any {
@@ -109,9 +103,8 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('userId');
     localStorage.removeItem('userToken');
-    this.loggedIn.next(false);
+    this.loggedIn = false;
     this.router.navigate(['/login']);
   }
 }

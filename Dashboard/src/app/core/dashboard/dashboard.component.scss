@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tinos&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rye&display=swap');
+@import '../../../theme/variables.scss';
+
+mat-radio-button {
+    display: block;
+    margin: 5px 0;
+    font-size: 13px;
+}
+
+form {
+    padding-bottom: 20px;
+
+    p {
+        font-weight: 500;
+        margin-bottom: 15px;
+    }
+}
+
+.other-txt {
+    margin-top: 10px;
+}
+
+.top-charts {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: 50% 50%;
+    margin-bottom: 2%;
+
+    h3 {
+        font-size: 16px;
+        font-weight: 600;
+    }
+}
+
+.btn {
+    margin-right: 21px;
+}
+
+#contentToConvert {
+    padding: 30px 60px;
+}
+
+header {
+    display: flex !important;
+    margin-top: 15px;
+    text-align: center;
+    color: #88861c;
+
+    img {
+        height: 150px;
+    }
+
+    address {
+        font-family: 'Tinos', serif;
+        font-style: normal !important;
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 0%;
+    }
+}
+
+.brand-name {
+    font-size: 28px;
+    font-family: 'Rye', cursive;
+}
+
+.heading {
+    color: black;
+    font-size: 20px;
+    margin: 10% 0%;
+    text-decoration: underline;
+}
+
+.footer {
+    margin-top: 10%;
+    font-size: 12px;
+    text-align: center;
+}
+
+.tag {
+    font-family: 'Tangerine', cursive;
+    font-size: 18px;
+    margin: 15px 0px 5px 0px;
+    color: #D01110;
+    text-align: center;
+}

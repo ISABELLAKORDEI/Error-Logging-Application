@@ -1,7 +1,299 @@
-<h1>Dashboard</h1>
-<div class = "card">
-    <div class="card-head">Lorem-dashboard</div>
-    <div class="card-body">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis explicabo corporis distinctio consequuntur nulla optio, delectus qui dolores consequatur, animi, ad minima! Dolore laudantium esse quidem accusantium sit animi recusandae!
+<!-- <main class="page">
+
+    <div *ngIf="!getDataError">
+        <section class="top-charts">
+            <div class="chart-sec">
+                <h3>Client Status</h3>
+                <div class="chart">
+                    <canvasjs-chart [options]="clientStats['statusChart']" [styles]="{width: '95%', height:'200px'}">
+                    </canvasjs-chart>
+                </div>
+            </div>
+            <div class="chart-sec">
+                <h3>Client Growth</h3>
+                <div class="chart">
+                    <canvasjs-chart [options]="clientStats['growthChart']" [styles]="{width: '95%', height:'200px'}">
+                    </canvasjs-chart>
+                </div>
+            </div>
+        </section>
+        <section class="table">
+            <div class="flex justify-between">
+                <div></div>
+                <button type="button" (click)="openAddModal()" class="btn"> Add Client <mat-icon>add</mat-icon></button>
+            </div>
+            <div class="page-content">
+                <mat-error class="form-error" *ngIf="isPageError">{{pageError}}</mat-error>
+                <mat-card class="data-table">
+                    <mat-card-header>
+                        <mat-card-title>Clients</mat-card-title>
+                        <div class="tb-count">{{dataSource.data.length}}</div>
+                    </mat-card-header>
+                    <mat-card-content *ngIf="dataSource.data.length != 0">
+
+                        <div class="table-filters">
+                            <mat-form-field class="filter-form" appearance="fill">
+                                <mat-label>
+                                    <mat-icon>search</mat-icon>Search Clients</mat-label>
+                                <input matInput (keyup)="searchClient($event)" placeholder="Enter Client Name" #input>
+                            </mat-form-field>
+                            <button type="button" (click)="openFilterTable(false)" class="modal-btn activate-color">
+                                Filter
+                                <mat-icon>filter_alt</mat-icon></button>
+                            <button type="button" (click)="openFilterTable(true)" class="modal-btn update-color"> Print
+                                Client List
+                                <mat-icon>print</mat-icon></button>
+                        </div>
+
+
+                        <table [dataSource]="dataSource" class="full-width" mat-table aria-label="Clients">
+
+                            <ng-container matColumnDef="id">
+                                <th mat-header-cell *matHeaderCellDef>Client ID</th>
+                                <td mat-cell *matCellDef="let row">{{row.id}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="client_name">
+                                <th mat-header-cell *matHeaderCellDef>Name</th>
+                                <td mat-cell *matCellDef="let row">{{row.client_name}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="mpesa_no">
+                                <th mat-header-cell *matHeaderCellDef>Phone Number</th>
+                                <td mat-cell *matCellDef="let row">{{row.mpesa_no}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="type">
+                                <th mat-header-cell *matHeaderCellDef>Type</th>
+                                <td mat-cell *matCellDef="let row">{{row.type}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="location">
+                                <th mat-header-cell *matHeaderCellDef>Location</th>
+                                <td mat-cell *matCellDef="let row">{{row.location}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="paid_until">
+                                <th mat-header-cell *matHeaderCellDef>Paid Until</th>
+                                <td mat-cell *matCellDef="let row" class="status">{{row.paid_until}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="pay_status">
+                                <th mat-header-cell *matHeaderCellDef>Pay Status</th>
+                                <td mat-cell
+                                    [ngClass]="{ot: row.pay_status === 'On Track', ie: row.pay_status === 'In Excess', od: row.pay_status === 'Overdue'}"
+                                    *matCellDef="let row">
+                                    {{row.pay_status}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="actions">
+                                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                                <td mat-cell *matCellDef="let row">
+                                    <a class="table-btn update-color" [routerLink]="[row.id]">View</a>
+                                    <button *ngIf="row.status == 'Active'" class="table-btn suspend-color"
+                                        (click)="openSusModal(row.id, row.client_name)">Suspend</button>
+                                    <button *ngIf="row.status != 'Active'" class="table-btn activate-color"
+                                        (click)="openActModal(row.id, row.client_name)">Activate</button>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr [ngClass]="{ susBg: row.status != 'Active' }" mat-row
+                                *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </mat-card-content>
+                    <mat-paginator #paginator [length]="dataSource.data.length" [pageSize]="50"
+                        [pageSizeOptions]="[10, 50, 100]" showFirstLastButtons>
+                    </mat-paginator>
+
+                    <div *ngIf="dataSource.data.length == 0" class="page-error">
+                        <mat-icon>filter_none</mat-icon>
+                        <mat-error>No Clients found</mat-error>
+                    </div>
+
+                </mat-card>
+            </div>
+        </section>
+    </div>
+
+    <div *ngIf="getDataError" class="page-error">
+        <mat-icon>error</mat-icon>
+        <mat-error>{{errorMessage}}</mat-error>
+    </div>
+
+</main>
+
+<div class="modal-container" id="modalcontainer">
+    <div class="modal-info">
+        <div class="close-btn" (click)="closeAddModal()">&times;</div>
+        <div class="form-grid-ctn">
+            <div class="img-left"></div>
+            <div class="form">
+                <app-client-form [client]="formValues" [isEdit]="isEdit"></app-client-form>
+            </div>
+        </div>
     </div>
 </div>
+
+<div class="modal-container" id="susCont">
+    <div class="confirm-modal-info">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>{{deletePrompt?'Terminate ':' Susupend '}} {{susName}} Client Contract</mat-card-title>
+                <div class="close-btn" (click)="closeSusModal()">&times;</div>
+            </mat-card-header>
+            <mat-card-content>
+                <form *ngIf="!deletePrompt" [formGroup]="susReasonForm" (ngSubmit)="suspendClient()">
+                    <p>Reason for Suspension of Service :</p>
+                    <div class="col">
+                        <mat-radio-group formControlName="sus_reason">
+                            <mat-radio-button value="Overdue Payment">Overdue Payment</mat-radio-button>
+                            <mat-radio-button value="Other">Other</mat-radio-button>
+                        </mat-radio-group>
+                        <mat-form-field *ngIf="showOtherTxt" class="full-width other-txt">
+                            <textarea matInput placeholder="Please enter the other reason for susupension"
+                                formControlName="other"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <mat-error *ngIf="susReasonForm.controls['sus_reason'].hasError('required')">
+                        Reason for suspension is <strong>required</strong>
+                    </mat-error>
+
+                    <div class="confirm-btns">
+                        <button class="modal-btn suspend-color" type="submit"
+                            [disabled]="susReasonForm.invalid">Suspend</button>
+                        <button class="modal-btn delete-color" (click)="showPrompt()">Terminate</button>
+                    </div>
+                </form>
+
+                <div *ngIf="deletePrompt">
+                    <p class="desc">Please note that this action results in the following actions :</p>
+                    <ol>
+                        <li>Deletion of all the client's details</li>
+                        <li>Deletion of all the client's payments</li>
+                    </ol>
+
+                    <div class="confirm-btns">
+                        <button *ngIf="deletePrompt" class="modal-btn confirm-color"
+                            (click)="closeSusModal()">Cancel</button>
+                        <button class="modal-btn delete-color" (click)="terminateClient()">Terminate Client</button>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
+<div class="modal-container" id="actCont">
+    <div class="confirm-modal-info">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Resume Service</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>Are you sure you want to activate <strong>{{activeName}}</strong>?</p>
+                <div class="confirm-btns">
+                    <button class="modal-btn confirm-color" (click)="closeActModal()">Cancel</button>
+                    <button class="modal-btn activate-color" (click)="activateClient()">Activate</button>
+                </div>
+                <mat-error class="form-error" *ngIf="isFormError">{{formError}}</mat-error>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
+<div class="modal-container" id="filterTableCont">
+    <div class="modal-info">
+        <div class="data-table">
+            <div class="close-btn" (click)="closeFilterModal()">&times;</div>
+
+            <button *ngIf="isPrint" class="modal-btn delete-color" (click)="downloadTemplate()"
+                style="margin-left: 60px;">Download<mat-icon>download</mat-icon></button>
+
+            <div id="contentToConvert" *ngIf="filterDs.data.length != 0">
+
+                <mat-card-title *ngIf="!isPrint">Filter Clients</mat-card-title>
+
+                <header *ngIf="isPrint">
+                    <img src="../../../../assets/images/dark-logo.png" alt="">
+                    <address>
+                        <p class="brand-name">PAIVA OKOTA TAKA</p>
+                        <p>Kirk House 4 Next to Total Petrol Station, Limuru Town</p>
+                        <p>Room No. K42</p>
+                        <p>PHONE NO : +254 723 067 610 / +254 724 854 741 / +254 714 004 940</p>
+                        <p>EMAIL : paiva1119@gmail.com</p>
+                        <p class="heading">CLIENT LIST</p>
+                    </address>
+                </header>
+
+                <div *ngIf="!isPrint" class="table-filters">
+                    <mat-form-field class="filter-form" appearance="fill" *ngFor="let cltfilter of cltFilters">
+                        <mat-label>
+                            <mat-icon>filter_alt</mat-icon>Filter by {{cltfilter.placeholder}}</mat-label>
+                        <mat-select [(value)]="cltfilter.defaultValue"
+                            (selectionChange)="applyCltFilter($event, cltfilter)">
+                            <mat-option *ngFor="let op of cltfilter.options" [value]="op">
+                                {{op}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <table [dataSource]="filterDs" class="full-width" mat-table aria-label="Clients">
+
+                    <ng-container matColumnDef="client_name">
+                        <th mat-header-cell *matHeaderCellDef>Name</th>
+                        <td mat-cell *matCellDef="let row">{{row.client_name}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="mpesa_no">
+                        <th mat-header-cell *matHeaderCellDef>Phone Number</th>
+                        <td mat-cell *matCellDef="let row">{{row.mpesa_no}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="type">
+                        <th mat-header-cell *matHeaderCellDef>Type</th>
+                        <td mat-cell *matCellDef="let row">{{row.type}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="no_of_units">
+                        <th mat-header-cell *matHeaderCellDef>No. of Units</th>
+                        <td mat-cell *matCellDef="let row">{{row.no_of_units}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="location">
+                        <th mat-header-cell *matHeaderCellDef>Location</th>
+                        <td mat-cell *matCellDef="let row">{{row.location}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="total_payable">
+                        <th mat-header-cell *matHeaderCellDef>Total Payable</th>
+                        <td mat-cell *matCellDef="let row">Kes. {{row.total_payable}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="pay_status">
+                        <th mat-header-cell *matHeaderCellDef>Pay Status</th>
+                        <td mat-cell [ngClass]="row.pay_status === 'On Track' ? 'ot' : 'od' " *matCellDef="let row">
+                            {{row.pay_status}}</td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="filterDsCols"></tr>
+                    <tr mat-row *matRowDef="let row; columns: filterDsCols;"></tr>
+
+                </table>
+
+                <div *ngIf="isPrint" class="footer">
+                    <hr>
+                    <p class="tag">Your Trash, Our Business</p>
+                    <p>Copyright © 2022 | Paiva Limited</p>
+                </div>
+
+            </div>
+
+            <div *ngIf="filterDs.data.length == 0" class="page-error">
+                <mat-icon>filter_none</mat-icon>
+                <mat-error>No Clients found</mat-error>
+            </div>
+        </div>
+    </div>
+</div> -->

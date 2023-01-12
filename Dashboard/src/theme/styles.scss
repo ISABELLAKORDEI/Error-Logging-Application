@@ -99,11 +99,6 @@ body {
             margin-block: 0px;
             margin: 6px 0px;
         }
-    
-        a {
-            color: $update;
-            font-weight: 500;
-        }
     }
 }
 
@@ -129,6 +124,33 @@ body {
     width: 95%;
     margin-top: 10px;
     margin-right: 20px;
+
+    mat-label{
+        font-size: 14px;
+        color: $primary;
+    }
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background: none;
+    border: 2px solid #002140;
+}
+
+.mat-mdc-form-field-error {
+    display: block;
+    font-size: 12px;
+}
+
+.redirect{
+    font-size: 14px;
+    color: black;
+    margin-bottom: 5px;
+
+    a {
+        color: $update;
+        font-weight: 500;
+        text-decoration: none;
+    }
 }
 
 .mat-form-field-prefix .mat-icon,
@@ -157,7 +179,7 @@ body {
     text-align: center;
     font-size: 12px;
     margin-block: 0px;
-    margin-top: 20%;
+    margin-top: 10%;
 
     span {
         color: $primary;
@@ -207,7 +229,7 @@ body {
 }
 
 .form-error {
-    font-size: 12px;
+    font-size: 12px !important;
     margin-top: 10px;
 }
 

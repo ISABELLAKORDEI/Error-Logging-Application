@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
   errorMessage: any;
 
   regForm = this.fb.group({
-    username: [null, Validators.required],
+    name: [null, Validators.required],
     email: [null, Validators.required],
     password: [null, Validators.compose([Validators.required, Validators.minLength(6)])],
   });
@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
     this.errorMessage = "";
     this.authService.register(this.regForm.getRawValue()).subscribe({
       next: (response) => {
-        this._snackBar.open('Your account has been created successfully', '', {
+        this._snackBar.open('Account created successfully', '', {
           duration: 2 * 1000,
         });
         setTimeout(() => {
@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
       },
       error: (error: HttpErrorResponse) => {
         if (error.status == 0) {
-          this.errorMessage = 'Registration Failed! Please check your internet connection or try again later';
+          this.errorMessage = 'Sign up Failed! Please check your internet connection or try again later';
         } else {
           this.errorMessage = 'User with this email address already exists.'
         }

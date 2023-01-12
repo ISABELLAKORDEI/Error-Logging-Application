@@ -26,7 +26,7 @@ export class AppComponent {
     this.isSideNavCollapsed = data.collapsed
   }
 
-  isLoggedIn$!: Observable<boolean>;
+  isLoggedIn: boolean = false;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -37,12 +37,10 @@ export class AppComponent {
   constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    var loggedIn$ = this.authService.isLoggedIn;
-    if (loggedIn$) {
-      //  get user profile
-      this.isLoggedIn$ = this.authService.isLoggedIn;
+    if (this.authService.isLoggedIn) {
+      this.isLoggedIn = this.authService.isLoggedIn;
     } else {
-      this.isLoggedIn$ = new BehaviorSubject<boolean>(false);
+      this.isLoggedIn = false;
       this.router.navigateByUrl('/login');
     }
   }

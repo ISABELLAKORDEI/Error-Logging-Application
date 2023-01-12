@@ -4,7 +4,6 @@
             <div class="form-desc">
                 <p>WELCOME BACK</p>
                 <h3>Sign in to your Account</h3>
-                <p>New member? <a routerLink="/register">Sign Up</a></p>
             </div>
         </div>
 
@@ -13,19 +12,21 @@
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
                 <mat-form-field class="form-field">
-                    <input matInput placeholder="Email Addess" formControlName="username" required>
+                    <mat-label>Email Addess</mat-label>
+                    <input matInput placeholder="johndoe@gmail.com" formControlName="email" required>
                     <mat-icon matSuffix>alternate_email</mat-icon>
-                    <mat-error *ngIf="loginForm.controls['username'].hasError('required')">
+                    <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
                         Your email address name is <strong>required</strong>
                     </mat-error>
-                    <mat-error *ngIf="loginForm.controls['username'].hasError('pattern')">
+                    <mat-error *ngIf="loginForm.controls['email'].hasError('pattern')">
                         Please enter a valid email address
                     </mat-error>
                 </mat-form-field>
 
                 <div class="flex">
                     <mat-form-field class="form-field">
-                        <input matInput type="password" placeholder="Password" [type]="hide ? 'password' : 'text'"
+                        <mat-label>Password</mat-label>
+                        <input matInput type="password" placeholder="********" [type]="hide ? 'password' : 'text'"
                             formControlName="password" required>
                         <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
                         </mat-icon>
@@ -35,7 +36,7 @@
                     </mat-form-field>
                 </div>
 
-                <button *ngIf="!isLoading" mat-raised-button class="form-btn" style="margin-top: 15px;" color="primary"
+                <button *ngIf="!isLoading" mat-raised-button class="form-btn" color="primary"
                     type="submit" [disabled]="loginForm.invalid">Log In</button>
                 <div *ngIf="isLoading" class="spinner">
                     <mat-spinner strokeWidth="3" diameter="40"></mat-spinner>
@@ -43,6 +44,7 @@
                 <mat-error class="form-error" *ngIf="isLoginError">{{errorMessage}}</mat-error>
 
                 <div class="form-footer">
+                    <p class="redirect">New member? <a routerLink="/register">Sign Up</a></p>
                     <p><span>Terms</span> and <span>Conditions</span> apply.</p>
                 </div>
             </form>
