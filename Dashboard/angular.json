@@ -25,8 +25,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/theme/styles.scss",
-              "node_modules/material-design-icons/iconfont/material-icons.css"
+              "src/theme/styles.scss"
             ],
             "scripts": []
           },
@@ -88,8 +87,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/theme/styles.scss",
-              "node_modules/material-design-icons/iconfont/material-icons.css"
+              "src/theme/styles.scss"
             ],
             "scripts": []
           }

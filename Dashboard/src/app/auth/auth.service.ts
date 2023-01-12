@@ -8,50 +8,36 @@ import { createUserUrl, loginUserUrl } from 'src/utils/urls';
   providedIn: 'root'
 })
 export class AuthService {
-  private loggedIn = false;
-
-  auth_headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': ''
-  });
-
-  headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-  });
+  private loggedIn = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  get getUserHeaders() {
-    var token = this.getLocalToken();
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Token ' + token
-    });
-  }
-
   get isLoggedIn() {
-    var token = this.getLocalToken();
-    if (token == undefined || {}) {
-      this.loggedIn = false;
+    var token = this.getLocalToken()['user_token'];
+    if (token == undefined) {
+      this.loggedIn.next(false);
     } else {
-      this.loggedIn = true;
+      this.loggedIn.next(true);
     }
-    return this.loggedIn;
+    return this.loggedIn.asObservable();
   }
 
   register(formValues: any): Observable<any> {
-    return this.http.post(createUserUrl, formValues, {
-      headers: {}, observe: 'response'
-    })
+    return this.http.post(createUserUrl, formValues, { observe: 'response' })
       .pipe(map(response => {
         return response;
       }));
   }
 
   updateUser(formValues: any): Observable<any> {
-    var userId = 1;
-    return this.http.patch(createUserUrl + userId + '/', formValues,
-      { headers: this.getUserHeaders, observe: 'response' })
+    return this.http.patch(createUserUrl + '/' + formValues['id'].toString(), formValues, { observe: 'response' })
+      .pipe(map(response => {
+        return response;
+      }));
+  }
+
+  deleteUser(id: number) {
+    return this.http.delete(createUserUrl + '/' + id.toString(),)
       .pipe(map(response => {
         return response;
       }));
@@ -59,42 +45,21 @@ export class AuthService {
 
   login(formValues: any): Observable<any> {
     return this.http.post<any>(loginUserUrl, formValues, {
-      headers: {},
-      observe: 'response'
+      observe: 'response',
     }).pipe(map(response => {
       if (response.status == 200) {
-        this.localSaveUser(response.body['data'].token);
-        this.loggedIn = true;
+        this.localSaveToken(response.body['data'].token);
+        this.loggedIn.next(true);
       } else {
-        this.loggedIn = false;
+        this.loggedIn.next(false);
       }
       return response;
     }));
   }
 
-  // getUser(): Observable<any> {
-  //   var token = this.getLocalToken();
-  //   var userId = this.getLocalId();
-  //   var user_headers = new HttpHeaders({
-  //     'Authorization': 'Token ' + token
-  //   });
-  //   return this.http.get<any>(createUserUrl + userId + '/', {
-  //     headers: user_headers,
-  //     observe: 'response'
-  //   }).pipe(map(response => {
-  //     return response;
-  //   }));
-  // }
 
-  getUser() {
-    return {
-      'first_name': 'Admin',
-      'last_name': 'One',
-      'role': 'Backend Lead'
-    };
-  }
 
-  localSaveUser(profile: any) {
+  localSaveToken(profile: any) {
     localStorage.setItem('userToken', JSON.stringify(profile));
   }
 
@@ -104,7 +69,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('userToken');
-    this.loggedIn = false;
+    this.loggedIn.next(false);
     this.router.navigate(['/login']);
   }
 }

@@ -25,8 +25,8 @@ export class AppComponent {
     this.screenWidth = data.screenWidth;
     this.isSideNavCollapsed = data.collapsed
   }
-
-  isLoggedIn: boolean = false;
+  
+  isLoggedIn$!: Observable<boolean>;                 
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -34,19 +34,15 @@ export class AppComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService, private router: Router) { }
+  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService) { }
 
   ngOnInit() {
-    if (this.authService.isLoggedIn) {
-      this.isLoggedIn = this.authService.isLoggedIn;
-    } else {
-      this.isLoggedIn = false;
-      this.router.navigateByUrl('/login');
-    }
+    this.isLoggedIn$ = this.authService.isLoggedIn; 
   }
 
   onLogout() {
-    this.authService.logout();
+    this.authService.logout();                    
   }
 
 }
+
