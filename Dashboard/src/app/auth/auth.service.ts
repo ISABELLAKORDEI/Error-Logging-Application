@@ -13,7 +13,8 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   get isLoggedIn() {
-    var token = this.getLocalToken()['user_token'];
+    var token = this.getLocalToken();
+    console.log(token);
     if (token == undefined) {
       this.loggedIn.next(false);
     } else {

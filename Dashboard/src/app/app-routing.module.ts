@@ -11,7 +11,7 @@ import { SettingsComponent } from './core/settings/settings.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  {path: '', redirectTo: '/login', pathMatch: 'full'},
+  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   {path: 'errors', component: ErrorsComponent, canActivate: [AuthGuard] },
   {path: 'recents', component: RecentsComponent, canActivate: [AuthGuard] },
