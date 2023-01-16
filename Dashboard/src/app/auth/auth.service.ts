@@ -14,7 +14,6 @@ export class AuthService {
 
   get isLoggedIn() {
     var token = this.getLocalToken();
-    console.log(token);
     if (token == undefined) {
       this.loggedIn.next(false);
     } else {

@@ -33,10 +33,8 @@ export class LoginComponent implements OnInit {
             duration: 2 * 1000,
           });
           setTimeout(() => {
-            console.log(this.authService.isLoggedIn);
             this.isLoading = false;
             this.router.navigateByUrl('/dashboard');
-            console.log(this.authService.isLoggedIn);
           }, 2000);
         },
       error: (error: HttpErrorResponse) => {
