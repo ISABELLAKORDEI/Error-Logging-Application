@@ -1,7 +1,8 @@
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { createUserUrl, loginUserUrl } from 'src/utils/urls';
 
 @Injectable({
@@ -10,13 +11,15 @@ import { createUserUrl, loginUserUrl } from 'src/utils/urls';
 export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router,
+    public jwtHelper: JwtHelperService,) { }
 
   get isLoggedIn() {
     var token = this.getLocalToken();
-    if (token == undefined) {
+    if (typeof token == "object") {
       this.loggedIn.next(false);
     } else {
+      // this.loggedIn.next(!this.jwtHelper.isTokenExpired(token));
       this.loggedIn.next(true);
     }
     return this.loggedIn.asObservable();

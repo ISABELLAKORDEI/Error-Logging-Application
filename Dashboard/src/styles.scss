@@ -12,9 +12,11 @@ $Dashboard-theme: mat.define-light-theme((color: (primary: $Dashboard-primary,
 @include mat.all-component-themes($Dashboard-theme);
 
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-@import './variables.scss';
+@import '../src/theme/variables.scss';
+
+.material-icons{
+    font-family: 'Material Icons' !important;
+}
 
 * {
     margin: 0;
@@ -76,9 +78,9 @@ body {
 }
 
 .form-left {
-    padding: 40px ;
+    padding: 40px;
     background-color: $primary;
-    background-image: url("../assets/images/troubleshooting.svg");
+    background-image: url("./assets/images/troubleshooting.svg");
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -86,14 +88,14 @@ body {
 
     .form-desc {
         margin-bottom: 25px;
-    
+
         p {
             color: whitesmoke;
             font-weight: 200;
             font-size: 14px;
             margin-block: 0px;
         }
-    
+
         h3 {
             font-size: 22px;
             font-weight: 600;
@@ -106,7 +108,7 @@ body {
 .form-right {
     padding: 40px;
 
-    h3{
+    h3 {
         color: $primary;
         font-size: 22px;
         margin: 20px 0px;
@@ -126,7 +128,7 @@ body {
     margin-top: 10px;
     margin-right: 20px;
 
-    mat-label{
+    mat-label {
         font-size: 14px;
         color: $primary;
     }
@@ -142,7 +144,7 @@ body {
     font-size: 12px;
 }
 
-.redirect{
+.redirect {
     font-size: 14px;
     color: black;
     margin-bottom: 5px;
@@ -297,4 +299,100 @@ body {
     background-color: $new;
     color: white;
     font-weight: 500;
+}
+
+
+/* ------------ table styles -------------- */
+.add-btn {
+    margin-bottom: 20px;
+    margin-right: 16px;
+}
+
+.data-table {
+    width: fit-content;
+    margin-top: 15px;
+    background-color: $primary;
+
+    .mat-card-header {
+        mat-card-title {
+            margin-top: 10px;
+        }
+
+        .tb-count {
+            background-color: yellow;
+            border-radius: 50%;
+            padding: 10px;
+            font-size: 14px;
+            margin: auto 10px;
+        }
+    }
+}
+
+th.mat-header-cell {
+    padding: 0px 7px !important;
+}
+
+td.mat-cell {
+    padding: 0px 7px !important;
+    font-size: 13px;
+}
+
+.table-btn {
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px;
+    margin: 3px;
+}
+
+.table-btn:hover {
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+.update-color {
+    background-color: $update;
+    color: white;
+}
+
+.primary-color {
+    background-color: $primary;
+    color: white;
+}
+
+.delete-color {
+    background-color: $delete;
+    color: white;
+}
+
+.suspend-color {
+    background-color: $suspend;
+    color: white;
+}
+
+.activate-color {
+    background-color: $activate;
+    color: white;
+}
+
+.confirm-color {
+    border: 1px solid $update;
+    color: $update;
+    background-color: transparent;
+}
+
+.page-error {
+    margin: auto;
+    color: lightslategray;
+    text-align: center;
+
+    mat-icon {
+        font-size: 48px;
+    }
+
+    mat-error {
+        margin-top: 15px;
+        font-size: 14px;
+        color: lightslategray !important;
+    }
 }

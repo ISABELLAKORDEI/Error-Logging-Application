@@ -40,9 +40,5 @@ export class AppComponent {
     this.isLoggedIn$ = this.authService.isLoggedIn; 
   }
 
-  onLogout() {
-    this.authService.logout();                    
-  }
-
 }
 

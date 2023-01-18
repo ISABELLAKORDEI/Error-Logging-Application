@@ -1,6 +1,7 @@
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { navbarData } from './nav.data';
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
+import { AuthService } from 'src/app/auth/auth.service';
 
 
 interface SideNavToggle{
@@ -57,6 +58,9 @@ export class SidenavComponent implements OnInit {
     }
   }
 
+  
+  constructor(private authService: AuthService) { }
+
   ngOnInit(): void{
     this.screenWidth = window.innerWidth;
   }
@@ -69,6 +73,10 @@ export class SidenavComponent implements OnInit {
   closeSidenav() : void{
     this.collapsed = false;
     this.onToggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
+  }
+
+  onLogout() {
+    this.authService.logout();                    
   }
   
 }
