@@ -14,7 +14,7 @@ $Dashboard-theme: mat.define-light-theme((color: (primary: $Dashboard-primary,
 /* You can add global styles to this file, and also import other style files */
 @import '../src/theme/variables.scss';
 
-.material-icons{
+.material-icons {
     font-family: 'Material Icons' !important;
 }
 
@@ -257,7 +257,7 @@ body {
 // *************************************
 
 .page {
-    margin: 30px 35px;
+    margin: 20px;
 }
 
 .page-title {
@@ -283,25 +283,6 @@ body {
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
 }
 
-.primary-color {
-    background-color: $primary;
-    color: white;
-    font-weight: 500;
-}
-
-.delete-color {
-    background-color: $delete;
-    color: white;
-    font-weight: 500;
-}
-
-.new-color {
-    background-color: $new;
-    color: white;
-    font-weight: 500;
-}
-
-
 /* ------------ table styles -------------- */
 .add-btn {
     margin-bottom: 20px;
@@ -309,26 +290,52 @@ body {
 }
 
 .data-table {
-    width: fit-content;
+    width: 95%;
     margin-top: 15px;
-    background-color: $primary;
+    color: $primary;
 
     .mat-card-header {
         mat-card-title {
+            color: $primary;
             margin-top: 10px;
+            font-size: 24px;
         }
 
         .tb-count {
             background-color: yellow;
             border-radius: 50%;
-            padding: 10px;
+            padding: 5px;
             font-size: 14px;
             margin: auto 10px;
+            color: $primary;
         }
+    }
+
+    table {
+        width: 100%;
     }
 }
 
+.table-filters {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.filter-form {
+    width: 65%;
+    font-size: 14px;
+    margin-top: 15px;
+    margin-right: 15px;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-label {
+    margin-top: -1em;
+}
+
 th.mat-header-cell {
+    color: $primary;
+    font-weight: 500;
     padding: 0px 7px !important;
 }
 
@@ -349,6 +356,24 @@ td.mat-cell {
 .table-btn:hover {
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
 }
+
+.page-error {
+    margin: auto;
+    color: lightslategray;
+    text-align: center;
+
+    mat-icon {
+        font-size: 48px;
+    }
+
+    mat-error {
+        margin-top: 15px;
+        font-size: 14px;
+        color: lightslategray !important;
+    }
+}
+
+// ------- Colors ----------
 
 .update-color {
     background-color: $update;
@@ -381,18 +406,43 @@ td.mat-cell {
     background-color: transparent;
 }
 
-.page-error {
-    margin: auto;
-    color: lightslategray;
+.nwcolor {
+    color: $new;
+    font-weight: 600;
+}
+
+.ipcolor {
+    color: $activate;
+    font-weight: 600;
+}
+
+.dncolor {
+    color: $update;
+    font-weight: 600;
+}
+
+.chip-cell {
+    border-radius: 10px;
     text-align: center;
+    font-size: 12px;
+}
 
-    mat-icon {
-        font-size: 48px;
-    }
+.infcolor {
+    @extend .chip-cell;
+    background-color: $suspend;
+    color: white;
+}
 
-    mat-error {
-        margin-top: 15px;
-        font-size: 14px;
-        color: lightslategray !important;
-    }
+.dgcolor {
+    @extend .chip-cell;
+    border-radius: 10px;
+    background-color: $activate;
+    color: white;
+}
+
+.ercolor {
+    @extend .chip-cell;
+    border-radius: 10px;
+    background-color: $delete;
+    color: white;
 }

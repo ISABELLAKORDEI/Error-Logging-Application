@@ -15,6 +15,7 @@ export interface Log {
     screen: string;
     os: string;
     status: string;
+    developer: string;
 }
 
 export interface Filter {
