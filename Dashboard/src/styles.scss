@@ -373,6 +373,152 @@ td.mat-cell {
     }
 }
 
+// ------- Modals ----------
+
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 1;
+}
+
+.show {
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.modal-info {
+    margin-left: 15%;
+    width: 70%;
+    position: absolute;
+    max-height: calc(100vh - 10%);
+    overflow-y: auto;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.confirm-modal-info {
+    @extend .modal-info;
+    width: 65%;
+
+    mat-card-content{
+        margin-left: 20px;
+    }
+
+    p {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+}
+
+.modal-btn {
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 10px 15px;
+    margin: 0px 3px;
+
+    mat-icon {
+        font-size: 13px;
+        height: 13px;
+        font-weight: 600;
+    }
+}
+
+.modal-btn:hover {
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+.confirm-btns {
+    margin-top: 20px;
+    padding-left: 35%;
+}
+
+.close-btn {
+    z-index: 1000;
+    position: absolute;
+    cursor: pointer;
+    right: 20px;
+    top: 15px;
+    width: 30px;
+    height: 30px;
+    background: $primary;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+// ------- Flex -----------
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.col {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.col:last-child {
+    margin-right: 0;
+}
+
+// ----- Info Items --------
+
+.info {
+    display: flex !important;
+    margin-top: 20px;
+}
+
+.info-item {
+    display: flex;
+
+    mat-icon {
+        margin-bottom: auto;
+        margin-top: 16px;
+        font-size: 16px;
+    }
+
+    .title {
+        margin-top: 10px;
+        font-size: 18px;
+        color: $primary;
+        font-weight: 600;
+    }
+}
+
+.info-col {
+    display: flex;
+    margin-bottom: 5px;
+
+    p {
+        margin-block: 0px;
+        font-size: 12px;
+        margin-right: 5px;
+        font-weight: 200;
+    }
+
+    .detail {
+        font-size: 14px;
+        font-weight: 500;
+    }
+}
+
 // ------- Colors ----------
 
 .update-color {

@@ -8,7 +8,7 @@ export interface User {
 }
 
 export interface Log {
-    id: number;
+    _id: number;
     typeOfLog: string;
     microservice: string;
     message: string;

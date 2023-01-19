@@ -20,12 +20,20 @@ export class DashboardComponent {
   getDataError: boolean = false;
   errorMessage: any;
   displayedColumns = ['_id', 'typeOfLog', 'microservice', 'screen', 'os', 'status', 'developer', 'message',  'actions'];
-
   statuses: string[] = ['All', 'New', 'In Progress', 'Done'];
   types: string[] = ['All', 'Info', 'Debug', 'Error'];
-
   cltFilters: Filter[] = [];
   filterDictionary = new Map<string, string>();
+  viewLog: Log = {
+    _id: 0,
+    typeOfLog: '',
+    microservice: '',
+    message: '',
+    screen: '',
+    os: '',
+    status: '',
+    developer: ''
+  };
 
   constructor(private fb: FormBuilder, private http: HttpClient, private _snackBar: MatSnackBar,
     private authService: AuthService,
@@ -62,6 +70,25 @@ export class DashboardComponent {
       }
     });
   }
+
+  openViewModal(viewLog: Log) {
+    this.viewLog = viewLog;
+    document.getElementById("viewLogModal")!.classList.toggle('show');
+  }
+
+  markAsDone() {
+   
+  }
+
+  assignToDev() {
+   
+  }
+
+  closeViewModal() {
+    document.getElementById("viewLogModal")!.classList.toggle('show');
+  }
+
+  // ------ utility functions -----------
 
   refreshPage() {
     this.getAllLogs();
