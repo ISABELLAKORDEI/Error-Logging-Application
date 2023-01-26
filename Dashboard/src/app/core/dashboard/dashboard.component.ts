@@ -19,9 +19,11 @@ export class DashboardComponent {
   dataSource: MatTableDataSource<Log>;
   getDataError: boolean = false;
   errorMessage: any;
-  displayedColumns = ['_id', 'typeOfLog', 'microservice', 'screen', 'os', 'status', 'developer', 'message',  'actions'];
+  displayedColumns = ['_id', 'typeOfLog', 'microservice', 'screen', 'os', 'status', 'developer', 'message', 'actions'];
   statuses: string[] = ['All', 'New', 'In Progress', 'Done'];
-  types: string[] = ['All', 'Info', 'Debug', 'Error'];
+  opSys: string[] = ['All'];
+  mcrServ: string[] = ['All'];
+  types: string[] = ['All', 'Info', 'Debug', 'Error', 'Fatal'];
   cltFilters: Filter[] = [];
   filterDictionary = new Map<string, string>();
   viewLog: Log = {
@@ -42,9 +44,11 @@ export class DashboardComponent {
   }
 
   ngOnInit(): void {
-    this.cltFilters.push({ placeholder: 'Log Status', name: 'status', options: this.statuses, defaultValue: 'All'});
-    this.cltFilters.push({ placeholder: 'Log Type', name: 'typeOfLog', options: this.types, defaultValue: 'All'});
-
+    this.cltFilters.push({ placeholder: 'Log Status', name: 'status', options: this.statuses, defaultValue: 'All' });
+    this.cltFilters.push({ placeholder: 'Log Type', name: 'typeOfLog', options: this.types, defaultValue: 'All' });
+    this.cltFilters.push({ placeholder: 'Operating System', name: 'os', options: this.opSys, defaultValue: 'All' });
+    this.cltFilters.push({ placeholder: 'Microservice', name: 'ms', options: this.mcrServ, defaultValue: 'All' });
+    
     this.getAllLogs();
   }
 
@@ -77,11 +81,11 @@ export class DashboardComponent {
   }
 
   markAsDone() {
-   
+
   }
 
   assignToDev() {
-   
+
   }
 
   closeViewModal() {

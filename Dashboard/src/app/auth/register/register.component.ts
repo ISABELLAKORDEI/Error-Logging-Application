@@ -15,10 +15,16 @@ export class RegisterComponent implements OnInit {
   isRegError: boolean = false;
   isLoading: boolean = false
   errorMessage: any;
+  roles = [
+    { name: 'Senior' },
+    { name: 'Junior' }];
+  stacks = [{ name: 'Frontend' }, { name: 'Backend' }, { name: 'Integrations' }, { name: 'UI/UX' }, { name: 'Testing' }, { name: 'Documentation' }, { name: 'Quality Assuarance' }];
 
   regForm = this.fb.group({
     name: [null, Validators.required],
-    email: [null, Validators.required],
+    email: [null, Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")],
+    stack: [null, Validators.required],
+    role: [null, Validators.required],
     password: [null, Validators.compose([Validators.required, Validators.minLength(6)])],
   });
 

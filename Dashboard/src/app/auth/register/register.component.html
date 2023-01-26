@@ -20,10 +20,35 @@
 
                 <mat-form-field class="form-field">
                     <mat-label>Email Addess</mat-label>
-                    <input matInput placeholder="Email Address" formControlName="email" required>
+                    <input matInput placeholder="johndoe@gmail.com" formControlName="email" required>
                     <mat-icon matSuffix>alternate_email</mat-icon>
                     <mat-error *ngIf="regForm.controls['email'].hasError('required')">
                         Your email address name is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="regForm.controls['email'].hasError('pattern')">
+                        Please enter a valid email address
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-field">
+                    <mat-select placeholder="Developer Stack" formControlName="stack">
+                        <mat-option *ngFor="let stack of stacks" [value]="stack.name">
+                            {{ stack.name }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="regForm.controls['stack'].hasError('required')">
+                        Developer Stack is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-field">
+                    <mat-select placeholder="Role" formControlName="role">
+                        <mat-option *ngFor="let role of roles" [value]="role.name">
+                            {{ role.name }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="regForm.controls['role'].hasError('required')">
+                        Role is <strong>required</strong>
                     </mat-error>
                 </mat-form-field>
 
