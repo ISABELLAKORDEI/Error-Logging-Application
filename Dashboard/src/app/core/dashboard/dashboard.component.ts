@@ -21,8 +21,8 @@ export class DashboardComponent {
   errorMessage: any;
   displayedColumns = ['_id', 'typeOfLog', 'microservice', 'screen', 'os', 'status', 'developer', 'message', 'actions'];
   statuses: string[] = ['All', 'New', 'In Progress', 'Done'];
-  opSys: string[] = ['All'];
-  mcrServ: string[] = ['All'];
+  opSys: string[] = ['All', 'Android', 'iOS'];
+  mcrServ: string[] = ['All', 'Categories MNGT', 'Inventory', 'M-PESA', 'Products SYS'];
   types: string[] = ['All', 'Info', 'Debug', 'Error', 'Fatal'];
   cltFilters: Filter[] = [];
   filterDictionary = new Map<string, string>();
@@ -47,7 +47,7 @@ export class DashboardComponent {
     this.cltFilters.push({ placeholder: 'Log Status', name: 'status', options: this.statuses, defaultValue: 'All' });
     this.cltFilters.push({ placeholder: 'Log Type', name: 'typeOfLog', options: this.types, defaultValue: 'All' });
     this.cltFilters.push({ placeholder: 'Operating System', name: 'os', options: this.opSys, defaultValue: 'All' });
-    this.cltFilters.push({ placeholder: 'Microservice', name: 'ms', options: this.mcrServ, defaultValue: 'All' });
+    this.cltFilters.push({ placeholder: 'Microservice', name: 'microservice', options: this.mcrServ, defaultValue: 'All' });
     
     this.getAllLogs();
   }
