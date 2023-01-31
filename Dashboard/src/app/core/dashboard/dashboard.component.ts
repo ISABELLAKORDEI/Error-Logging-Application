@@ -6,7 +6,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/auth/auth.service';
-import { Log, Filter } from 'src/utils/models';
+import { Log, Filter, convertApiLog } from 'src/utils/models';
 import { LogsService } from './logs.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class DashboardComponent {
   dataSource: MatTableDataSource<Log>;
   getDataError: boolean = false;
   errorMessage: any;
-  displayedColumns = ['_id', 'typeOfLog', 'microservice', 'screen', 'os', 'status', 'developer', 'message', 'actions'];
+  displayedColumns = ['_id', 'typeOfLog', 'microservice', 'screen', 'os', 'status', 'developer.name', 'message', 'actions'];
   statuses: string[] = ['All', 'New', 'In Progress', 'Done'];
   opSys: string[] = ['All', 'Android', 'iOS'];
   mcrServ: string[] = ['All', 'Categories MNGT', 'Inventory', 'M-PESA', 'Products SYS'];
@@ -55,7 +55,10 @@ export class DashboardComponent {
   getAllLogs() {
     this.logsServ.getAllLogs().subscribe({
       next: (response) => {
-        this.dataSource.data = response.body['data'];
+        response.body['data'].forEach((element: any) => {
+          this.dataSource.data.push(convertApiLog(element));
+        });
+        console.log(this.dataSource)
         this.dataSource.paginator = this.paginator;
         this.dataSource.filterPredicate = function (record, filter) {
           var map = new Map(JSON.parse(filter));
@@ -85,7 +88,21 @@ export class DashboardComponent {
   }
 
   assignToDev() {
-
+    this.logsServ.updateLog(this.viewLog._id, "In Progress").subscribe({
+      next: (response) => {
+        this._snackBar.open('Log assigned to you', 'Happy Coding :)', {
+          duration: 2 * 1000,
+        });
+        setTimeout(() => {
+          this.refreshPage()
+        }, 2000);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.errorMessage = "Error retrieving Logs! Please check your internet connection or try again later.";
+        this.getDataError = true;
+        throw error;
+      }
+    });
   }
 
   closeViewModal() {

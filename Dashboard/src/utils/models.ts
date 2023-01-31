@@ -24,3 +24,22 @@ export interface Filter {
     options: string[];
     defaultValue: string;
 }
+
+export function convertApiLog(apiLog: any): Log {
+    var dev = apiLog['developer']
+
+    if(dev != null) {
+        dev = apiLog['developer']['name']
+    }
+
+    return {
+        _id: apiLog['_id'],
+        typeOfLog: apiLog['typeOfLog'],
+        microservice: apiLog['microservice'],
+        message: apiLog['message'],
+        screen: apiLog['screen'],
+        os: apiLog['os'],
+        status: apiLog['status'],
+        developer: dev,
+    };
+  }

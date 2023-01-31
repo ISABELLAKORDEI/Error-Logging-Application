@@ -2,7 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
-import { getAllLogsUrl, getDevLogsUrl } from 'src/utils/urls';
+import { Log } from 'src/utils/models';
+import { getAllLogsUrl, getDevLogsUrl, updateLog } from 'src/utils/urls';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,17 @@ export class LogsService {
     }).pipe(map(response => {
       return response;
     }));
+  }
+
+  updateLog(id: number, status: string): Observable<any> {
+    return this.http.put(updateLog + '/' + id.toString(), {
+      "status": status
+    }, {
+      headers: this.headers, 
+      observe: 'response' 
+    }).pipe(map(response => {
+        return response;
+      }));
   }
 
 }
