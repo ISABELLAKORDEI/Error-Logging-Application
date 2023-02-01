@@ -94,15 +94,15 @@ export class DashboardComponent {
           topCards: [
             {
               title: 'New',
-              total: parseInt(response.body['new'])
+              total: parseInt(response.body[0]['count'])
             },
             {
               title: 'In Progress',
-              total: parseInt(response.body['In Progress'])
+              total: parseInt(response.body[1]['count'])
             },
             {
               title: 'Done',
-              total: parseInt(response.body['Solved'])
+              total: parseInt(response.body[2]['count'])
             }
           ],
           payStatusChart: {
