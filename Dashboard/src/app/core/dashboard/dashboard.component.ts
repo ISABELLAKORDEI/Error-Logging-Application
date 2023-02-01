@@ -19,7 +19,7 @@ export class DashboardComponent {
   dataSource: MatTableDataSource<Log>;
   getDataError: boolean = false;
   errorMessage: any;
-  displayedColumns = ['_id', 'typeOfLog', 'microservice', 'screen', 'os', 'status', 'developer.name', 'message', 'actions'];
+  displayedColumns = ['_id', 'typeOfLog', 'microservice', 'status', 'developer.name', 'message', 'actions'];
   statuses: string[] = ['All', 'New', 'In Progress', 'Done'];
   opSys: string[] = ['All', 'Android', 'iOS'];
   mcrServ: string[] = ['All', 'Categories MNGT', 'Inventory', 'M-PESA', 'Products SYS'];
@@ -35,6 +35,10 @@ export class DashboardComponent {
     os: '',
     status: '',
     developer: ''
+  };
+  homeStats: any = {
+    topCards: [],
+    payStatusChart: {},
   };
 
   constructor(private fb: FormBuilder, private http: HttpClient, private _snackBar: MatSnackBar,
@@ -78,13 +82,54 @@ export class DashboardComponent {
     });
   }
 
+  getStatusStats() {
+    this.logsServ.getLogStatusStats().subscribe({
+      next: (response) => {
+        console.log(response.body);
+        var x = '600';
+        parseInt(x).toLocaleString()
+        this.homeStats = {
+          topCards: [
+            {
+              title: 'New',
+              total: parseInt(response.body['new'])
+            },
+            {
+              title: 'In Progress',
+              total: parseInt(response.body['In Progress'])
+            },
+            {
+              title: 'Done',
+              total: parseInt(response.body['Done'])
+            }
+          ],
+          payStatusChart: {
+            animationEnabled: true,
+            legend: {
+              cursor: "pointer",
+            },
+            data: [{
+              type: "pie",
+              showInLegend: true,
+              toolTipContent: "{name}: <strong>{val}</strong>",
+              indexLabel: "{name} - {y}%",
+              dataPoints: response.body['pay_status']
+            }]
+          },
+        }
+      },
+      error: (error: HttpErrorResponse) => {
+        this.errorMessage = "Error retrieving Home Status! Please check your internet connection or try again later.";
+        this.getDataError = true;
+        throw error;
+      }
+    });
+  }
+
+
   openViewModal(viewLog: Log) {
     this.viewLog = viewLog;
     document.getElementById("viewLogModal")!.classList.toggle('show');
-  }
-
-  markAsDone() {
-
   }
 
   assignToDev() {
@@ -120,11 +165,6 @@ export class DashboardComponent {
     this.filterDictionary.set(cltfilter.name, ob!.value);
     var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
     this.dataSource.filter = jsonString;
-  }
-
-  searchClient(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }

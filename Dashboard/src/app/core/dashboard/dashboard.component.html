@@ -1,6 +1,31 @@
 <main class="page">
 
     <div *ngIf="!getDataError">
+
+        <section class="stats">
+            <h3 class="page-title">Logs Report</h3>
+            <div class="flex stat-cards">
+                <mat-card *ngFor="let acc of homeStats['topCards']" class="col">
+                    <div class="flex justify-between card-header">
+                        <p class="card-title">{{acc.title}}</p>
+                        <mat-icon class="primary-color" *ngIf="acc.title == 'New'">call_made</mat-icon>
+                        <mat-icon class="activate-color" *ngIf="acc.title == 'In Progress'">call_received</mat-icon>
+                        <mat-icon class="update-color" *ngIf="acc.title == 'Done'">group</mat-icon>
+                    </div>
+                    <p [ngClass]="{'ot': acc.title == 'more', 'od':  acc.title == 'less', 'ie': acc.title == 'neut', 'db': acc.title == 'minus'}"
+                        class="stat">{{acc.total}}</p>
+                </mat-card>
+            </div>
+        </section>
+
+        <!-- <div class="stats">
+            <h3>Client Payment Status</h3>
+            <div class="chart">
+                <canvasjs-chart [options]="homeStats['payStatusChart']" [styles]="{width: '100%', height:'270px'}">
+                </canvasjs-chart>
+            </div>
+        </div> -->
+
         <section class="table">
             <mat-card class="data-table">
                 <mat-card-header>
@@ -41,16 +66,6 @@
                         <ng-container matColumnDef="microservice">
                             <th mat-header-cell *matHeaderCellDef>Micoservice</th>
                             <td mat-cell *matCellDef="let row">{{row.microservice}}</td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="screen">
-                            <th mat-header-cell *matHeaderCellDef>Screen</th>
-                            <td mat-cell *matCellDef="let row">{{row.screen}}</td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="os">
-                            <th mat-header-cell *matHeaderCellDef>Operating System</th>
-                            <td mat-cell *matCellDef="let row">{{row.os}}</td>
                         </ng-container>
 
                         <ng-container matColumnDef="message">
@@ -95,6 +110,7 @@
 
             </mat-card>
         </section>
+
     </div>
 
     <div *ngIf="getDataError" class="page-error">
@@ -169,8 +185,6 @@
                 <div class="confirm-btns">
                     <button *ngIf="viewLog.typeOfLog == 'Error' || viewLog.typeOfLog == 'Fatal'" 
                     class="modal-btn update-color" (click)="assignToDev()">Assign To Self</button>
-                    <!-- <button *ngIf="viewLog.status == 'New'" 
-                    class="modal-btn activate-color" (click)="markAsDone()">Mark As Done</button> -->
                 </div>
             </mat-card-content>
         </mat-card>

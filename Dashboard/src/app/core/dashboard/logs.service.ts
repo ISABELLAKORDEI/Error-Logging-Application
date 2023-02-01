@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
-import { getAllLogsUrl, getDevLogsUrl, updateLog } from 'src/utils/urls';
+import { mainLogUrl, getDevLogsUrl, getStatsUrl } from 'src/utils/urls';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class LogsService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getAllLogs(): Observable<any> {
-    return this.http.get<any>(getAllLogsUrl, {
+    return this.http.get<any>(mainLogUrl, {
       headers: this.headers,
       observe: 'response'
     }).pipe(map(response => {
@@ -33,7 +33,7 @@ export class LogsService {
   }
 
   updateLog(id: number, status: string): Observable<any> {
-    return this.http.put(updateLog + '/' + id.toString(), {
+    return this.http.put(mainLogUrl + '/' + id.toString(), {
       "status": status
     }, {
       headers: this.headers, 
@@ -44,7 +44,7 @@ export class LogsService {
   }
 
   unassignLog(id: number, status: string): Observable<any> {
-    return this.http.put(updateLog + '/' + id.toString(), {
+    return this.http.put(mainLogUrl + '/' + id.toString(), {
       "status": status,
       "developer": null
     }, {
@@ -53,6 +53,33 @@ export class LogsService {
     }).pipe(map(response => {
         return response;
       }));
+  }
+
+  getLogTypeStats(): Observable<any> {
+    return this.http.get<any>(getStatsUrl + 'type', {
+      headers:  this.headers,
+      observe: 'response'
+    }).pipe(map(response => {
+      return response;
+    }));
+  }
+
+  getLogMsStats(): Observable<any> {
+    return this.http.get<any>(getStatsUrl + 'microservice', {
+      headers:  this.headers,
+      observe: 'response'
+    }).pipe(map(response => {
+      return response;
+    }));
+  }
+
+  getLogStatusStats(): Observable<any> {
+    return this.http.get<any>(getStatsUrl + 'status', {
+      headers:  this.headers,
+      observe: 'response'
+    }).pipe(map(response => {
+      return response;
+    }));
   }
 
 }
