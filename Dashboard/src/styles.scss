@@ -309,10 +309,6 @@ body {
             color: $primary;
         }
     }
-
-    table {
-        width: 100%;
-    }
 }
 
 .table-filters {
@@ -591,3 +587,111 @@ td.mat-cell {
     background-color: $delete;
     color: white;
 }
+
+
+/* -------------- card stats ------------------- */
+.stat-cards {
+    margin-bottom: 4%;
+  
+    mat-card {
+      border-radius: 12px;
+    }
+  }
+  
+  .stat {
+    font-weight: 500;
+    font-size: 18px;
+    margin-block: 0px;
+    padding: 20px 0px;
+  }
+  
+  .card-header {
+    .card-title {
+      font-weight: 500;
+      font-size: 16px;
+      margin-right: 25px;
+      padding-top: 6px;
+      margin-block: 0px;
+    }
+  
+    mat-icon {
+      width: fit-content;
+      padding: 5px;
+      height: fit-content;
+      border-radius: 40%;
+      font-size: 18px;
+    }
+  }
+  
+  .trend {
+    height: 15px;
+    font-size: 14px;
+  
+    mat-icon {
+      font-size: 22px;
+      padding-top: 8px;
+      padding-right: 5px;
+    }
+  }
+  
+  .chips {
+    p {
+      font-weight: 500;
+      font-size: 13px;
+      margin-block: 0px;
+    }
+  }
+  
+  .chips-title {
+    color: $update;
+    padding-bottom: 5px;
+  }
+  
+  .chips-ctn {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 1em;
+  }
+  
+  .chip-btn {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background: black;
+    color: white;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 18px;
+    margin-left: 5px;
+    padding-bottom: 1px;
+  }
+  
+  .page-tabs {
+    margin-top: 20px;
+  
+    mat-card {
+      width: 97%;
+    }
+  }
+  
+  .inner-page {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: 70% 30%;
+    column-gap: 10px;
+  
+    .stats {
+      h3 {
+        margin-top: 20px;
+        font-size: 16px;
+      }
+    }
+  }
+  
+  .table-icon-btn {
+    font-size: 20px;
+    color: $delete !important;
+  }

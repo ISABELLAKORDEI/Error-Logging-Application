@@ -32,6 +32,8 @@ import { AuthService } from './auth/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import * as CanvasJSAngularChart from '../assets/chartjs/canvasjs.angular.component';
+var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     RecentsComponent,
     LoginComponent,
     RegisterComponent,
+    CanvasJSChart
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatDividerModule,
     MatListModule,
     ReactiveFormsModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [
     AuthService,
