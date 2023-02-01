@@ -10,7 +10,7 @@
                         <p class="card-title">{{acc.title}}</p>
                         <mat-icon class="primary-color" *ngIf="acc.title == 'New'">call_made</mat-icon>
                         <mat-icon class="activate-color" *ngIf="acc.title == 'In Progress'">call_received</mat-icon>
-                        <mat-icon class="update-color" *ngIf="acc.title == 'Done'">group</mat-icon>
+                        <mat-icon class="update-color" *ngIf="acc.title == 'Solved'">group</mat-icon>
                     </div>
                     <p [ngClass]="{'ot': acc.title == 'more', 'od':  acc.title == 'less', 'ie': acc.title == 'neut', 'db': acc.title == 'minus'}"
                         class="stat">{{acc.total}}</p>
@@ -82,7 +82,7 @@
                         <ng-container matColumnDef="status">
                             <th mat-header-cell *matHeaderCellDef>Status</th>
                             <td mat-cell
-                                [ngClass]="{nwcolor: row.status === 'New', ipcolor: row.status === 'In Progress', dncolor: row.status=== 'Done'}"
+                                [ngClass]="{nwcolor: row.status === 'New', ipcolor: row.status === 'In Progress', dncolor: row.status=== 'Solved'}"
                                 *matCellDef="let row">
                                 {{row.status}}</td>
                         </ng-container>
@@ -99,7 +99,7 @@
 
                     </table>
                 </mat-card-content>
-                <mat-paginator #paginator [length]="dataSource.data.length" [pageSize]="50"
+                <mat-paginator #paginator [length]="dataSource.data.length" [pageSize]="10"
                     [pageSizeOptions]="[10, 50, 100]" showFirstLastButtons>
                 </mat-paginator>
 

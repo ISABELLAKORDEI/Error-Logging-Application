@@ -20,10 +20,10 @@ export class ErrorsComponent implements OnInit {
   getDataError: boolean = false;
   errorMessage: any;
   displayedColumns = ['_id', 'typeOfLog', 'microservice', 'status', 'developer.name', 'message', 'actions'];
-  statuses: string[] = ['All', 'New', 'In Progress', 'Done'];
+  statuses: string[] = ['All', 'In Progress', 'Solved'];
   opSys: string[] = ['All', 'Android', 'iOS'];
   mcrServ: string[] = ['All', 'Categories MNGT', 'Inventory', 'M-PESA', 'Products SYS'];
-  types: string[] = ['All', 'Info', 'Debug', 'Error', 'Fatal'];
+  types: string[] = ['All', 'Error', 'Fatal'];
   cltFilters: Filter[] = [];
   filterDictionary = new Map<string, string>();
   viewLog: Log = {
@@ -84,7 +84,7 @@ export class ErrorsComponent implements OnInit {
   }
 
     markAsDone() {
-      this.logsServ.updateLog(this.viewLog._id, "Done").subscribe({
+      this.logsServ.updateLog(this.viewLog._id, "Solved").subscribe({
         next: (response) => {
           this._snackBar.open('Issue Resolved!', 'Go to All Logs to take up more logs', {
             duration: 2 * 1000,

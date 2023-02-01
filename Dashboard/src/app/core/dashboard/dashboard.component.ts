@@ -20,7 +20,7 @@ export class DashboardComponent {
   getDataError: boolean = false;
   errorMessage: any;
   displayedColumns = ['_id', 'typeOfLog', 'microservice', 'status', 'developer.name', 'message', 'actions'];
-  statuses: string[] = ['All', 'New', 'In Progress', 'Done'];
+  statuses: string[] = ['All', 'New', 'In Progress', 'Solved'];
   opSys: string[] = ['All', 'Android', 'iOS'];
   mcrServ: string[] = ['All', 'Categories MNGT', 'Inventory', 'M-PESA', 'Products SYS'];
   types: string[] = ['All', 'Info', 'Debug', 'Error', 'Fatal'];
@@ -54,15 +54,17 @@ export class DashboardComponent {
     this.cltFilters.push({ placeholder: 'Microservice', name: 'microservice', options: this.mcrServ, defaultValue: 'All' });
     
     this.getAllLogs();
+    this.getStatusStats();
   }
 
   getAllLogs() {
     this.logsServ.getAllLogs().subscribe({
       next: (response) => {
         response.body['data'].forEach((element: any) => {
+          if(element['status'] == 'New'){
           this.dataSource.data.push(convertApiLog(element));
+          }
         });
-        console.log(this.dataSource)
         this.dataSource.paginator = this.paginator;
         this.dataSource.filterPredicate = function (record, filter) {
           var map = new Map(JSON.parse(filter));
@@ -100,7 +102,7 @@ export class DashboardComponent {
             },
             {
               title: 'Done',
-              total: parseInt(response.body['Done'])
+              total: parseInt(response.body['Solved'])
             }
           ],
           payStatusChart: {
