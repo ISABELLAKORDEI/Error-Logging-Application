@@ -1,11 +1,14 @@
 <main class="page">
 
+    <h3 class="page-title">My Logs</h3>
+
     <div *ngIf="!getDataError">
         <section class="table">
             <mat-card class="data-table">
                 <mat-card-header>
-                    <mat-card-title>Logs</mat-card-title>
-                    <div class="tb-count">{{dataSource.data.length}}</div>
+                    <div><b>{{dataSource.data.length}}</b></div>
+                    &nbsp;
+                    <p><b>Logs</b></p>
                 </mat-card-header>
                 <mat-card-content *ngIf="dataSource.data.length != 0">
 

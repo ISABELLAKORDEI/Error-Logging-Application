@@ -54,7 +54,7 @@ export class DashboardComponent {
     this.cltFilters.push({ placeholder: 'Microservice', name: 'microservice', options: this.mcrServ, defaultValue: 'All' });
     
     this.getAllLogs();
-    this.getStatusStats();
+    // this.getStatusStats();
   }
 
   getAllLogs() {
@@ -87,23 +87,16 @@ export class DashboardComponent {
   getStatusStats() {
     this.logsServ.getLogStatusStats().subscribe({
       next: (response) => {
-        console.log(response.body);
+        console.log(response.body['data']);
         var x = '600';
         parseInt(x).toLocaleString()
+
         this.homeStats = {
           topCards: [
-            {
-              title: 'New',
-              total: parseInt(response.body[0]['count'])
-            },
-            {
-              title: 'In Progress',
-              total: parseInt(response.body[1]['count'])
-            },
-            {
-              title: 'Done',
-              total: parseInt(response.body[2]['count'])
-            }
+            ...response.body['data'].map((item: any) => ({
+              title: item['status'],
+              count: item['count']
+            }))
           ],
           payStatusChart: {
             animationEnabled: true,

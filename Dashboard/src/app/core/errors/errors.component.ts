@@ -58,7 +58,6 @@ export class ErrorsComponent implements OnInit {
         response.body['data'].forEach((element: any) => {
           this.dataSource.data.push(convertApiLog(element));
         });
-        console.log(this.dataSource)
         this.dataSource.paginator = this.paginator;
         this.dataSource.filterPredicate = function (record, filter) {
           var map = new Map(JSON.parse(filter));

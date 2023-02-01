@@ -1,7 +1,7 @@
 <main class="page">
 
     <div *ngIf="!getDataError">
-
+<!-- 
         <section class="stats">
             <h3 class="page-title">Logs Report</h3>
             <div class="flex stat-cards">
@@ -16,21 +16,23 @@
                         class="stat">{{acc.total}}</p>
                 </mat-card>
             </div>
-        </section>
+        </section> -->
 
         <!-- <div class="stats">
-            <h3>Client Payment Status</h3>
             <div class="chart">
                 <canvasjs-chart [options]="homeStats['payStatusChart']" [styles]="{width: '100%', height:'270px'}">
                 </canvasjs-chart>
             </div>
         </div> -->
 
+        <h3>Log Status</h3>
+
         <section class="table">
             <mat-card class="data-table">
                 <mat-card-header>
-                    <mat-card-title>Logs</mat-card-title>
-                    <div class="tb-count">{{dataSource.data.length}}</div>
+                    <div><b>{{dataSource.data.length}}</b></div>
+                    &nbsp;
+                    <p><b>Logs</b></p>
                 </mat-card-header>
                 <mat-card-content *ngIf="dataSource.data.length != 0">
 
@@ -58,7 +60,7 @@
                             <th mat-header-cell *matHeaderCellDef>Type of Log</th>
                             <td mat-cell *matCellDef="let row">
                                 <div
-                                    [ngClass]="{infcolor: row.typeOfLog === 'Info', dgcolor: row.typeOfLog === 'Debug', ercolor: row.typeOfLog=== 'Error'}">
+                                    [ngClass]="{infcolor: row.typeOfLog === 'Info', dgcolor: row.typeOfLog === 'Debug', ercolor: row.typeOfLog=== 'Error' || row.typeOfLog=== 'Fatal'}">
                                     {{row.typeOfLog}}</div>
                             </td>
                         </ng-container>
